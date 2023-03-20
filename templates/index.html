@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Environment graph {% endblock %}</h1>
+    <div>
+        <canvas id="mainChart"></canvas>
+    </div>
+    <input type="hidden" name="graph_data" id="graph_data" value="{% for graph_data in data %}{{graph_data['created']}},{{graph_data['pm25']}},{{graph_data['pm10']}},{{graph_data['temperature']}},{{graph_data['humidity']}},{{graph_data['noise']}}|{% endfor %}"> 
+
+{% endblock %}
+{% block script %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type = "text/javascript" src = "{{ url_for('static', filename = 'js/main.js') }}" ></script>      
+{% endblock %}
