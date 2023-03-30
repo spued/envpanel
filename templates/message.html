@@ -10,4 +10,8 @@
         </a>
         <hr>
     {% endfor %}
+    <h1>Message of the day</h1>
+    {% for motd in lines %}
+        <h6>{{ motd }}</h6>
+    {% endfor %}
 {% endblock %}

@@ -33,8 +33,11 @@ def about():
 def messages():
     conn = get_db_connection()
     posts = conn.execute('SELECT * FROM posts').fetchall()
+    motd_file = open("/home/sunya/envpanel/templates/motd.txt", "r")
+    lines = motd_file.readlines()
+    motd_file.close
     conn.close()
-    return render_template('message.html', posts=posts)
+    return render_template('message.html', posts=posts, lines=lines)
 @app.route('/<int:post_id>')
 def post(post_id):
     post = get_post(post_id)

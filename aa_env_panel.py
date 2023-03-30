@@ -63,17 +63,22 @@ font_small.LoadFont("/home/sunya/envpanel/fonts/5x8.bdf")
 font_big = graphics.Font()
 font_big.LoadFont("/home/sunya/envpanel/fonts/8x13B.bdf")
 
-yellow = graphics.Color(255, 198, 153)
+yellow = graphics.Color(190, 198, 16)
 white = graphics.Color(180, 180, 255)
+half_white = graphics.Color(90, 90, 128)
 cyan = graphics.Color(0, 255, 255)
-magenta = graphics.Color(255, 0, 255)
+magenta = graphics.Color(190, 0, 190)
 green = graphics.Color(0, 198, 32)
-pink = graphics.Color(255, 192, 203)
-blue = graphics.Color(0, 0, 255)
-navy = graphics.Color(0, 16, 64)
+dark_green = graphics.Color(10, 56, 16)
+pink = graphics.Color(190, 128, 160)
+blue = graphics.Color(0, 16, 255)
+navy = graphics.Color(8, 16, 86)
 black = graphics.Color(0, 0, 0)
 orange = graphics.Color(255, 128, 0)
 red = graphics.Color(255, 0, 0)
+dark_red = graphics.Color(64, 0, 0)
+
+day_colors = [red,yellow,pink,green,orange,blue,magenta]
 
 pos = offscreen_canvas.width
 
@@ -130,7 +135,7 @@ while True:
     now = datetime.now() # current date and time
     date_message = now.strftime("%A").upper()
     date_message_2 = now.strftime("%d/%m/%Y")
-    #day_number = int(now.strftime("%u"))-1
+    day_number = int(now.strftime("%w"))
     #date_message_t = day_name_brief[day_number]
     #month_number = int(now.strftime("%m"))-1
     #date_message_2_t = now.strftime("%d ") + month_name_brief[month_number] + str(int(now.strftime("%Y")) + 543)
@@ -138,14 +143,14 @@ while True:
 
     offscreen_canvas.Clear()
     DrawFillRectangle(offscreen_canvas, 0, 0, 95, 47, navy)
-    DrawRectangle(offscreen_canvas, 0, 0, 95, 15, yellow)
-    DrawFillRectangle(offscreen_canvas, 0, 16, 95, 29, black)
-    DrawRectangle(offscreen_canvas, 0, 29, 95, 47, yellow)
-    graphics.DrawText(offscreen_canvas, font_small, 2, 7, magenta, date_message)
-    graphics.DrawText(offscreen_canvas, font_small, 2, 14, magenta, date_message_2)
+    DrawRectangle(offscreen_canvas, 0, 0, 95, 15, white)
+    DrawFillRectangle(offscreen_canvas, 0, 16, 95, 29, dark_green)
+    DrawRectangle(offscreen_canvas, 0, 29, 95, 47, half_white)
+    graphics.DrawText(offscreen_canvas, font_small, 2, 7, day_colors[day_number], date_message)
+    graphics.DrawText(offscreen_canvas, font_small, 2, 14, cyan, date_message_2)
     graphics.DrawText(offscreen_canvas, font_big, 55, 13, orange, time_message)
 
-    len1 = graphics.DrawText(offscreen_canvas, font, pos, 27, cyan, display_message)
+    len1 = graphics.DrawText(offscreen_canvas, font, pos, 27, white, display_message)
 
     if(int(env_rows['pm25']) > 100):
         graphics.DrawText(offscreen_canvas, font, 2 , 42, red, msg[show_number])
